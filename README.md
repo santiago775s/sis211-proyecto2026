@@ -2,12 +2,10 @@
 
 Un mismo software que **crece**: v1 (estructuras simples) → v2 (jerárquicas) → v3 (grafos).
 
-**Hoy solo existe la branch `v1`.** No creen `v2` ni `v3`.
 
 | | |
 | --- | --- |
 | **Estudiante** | Santiago Torres |
-| **Dominio** | Sistema de biblioteca |
 | **Repo** | https://github.com/TU-USUARIO/sis211-proyecto2026.git |
 
 ## Mapa v1 (mínimo tres familias distintas)
