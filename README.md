@@ -6,7 +6,7 @@ Un mismo software que **crece**: v1 (estructuras simples) → v2 (jerárquicas) 
 | | |
 | --- | --- |
 | **Estudiante** | Santiago Torres |
-| **Repo** | https://github.com/TU-USUARIO/sis211-proyecto2026.git |
+| **Repo** | https://github.com/santiago775s/sis211-proyecto2026.git |
 
 ## Mapa v1 (mínimo tres familias distintas)
 
@@ -26,13 +26,33 @@ Cómo probar un caso límite (vacío, no encontrado o duplicado):
 > - Lista vacía: pedir el historial de préstamos de un usuario sin préstamos debería responder "No hay préstamos" o algo similar.
 > - Duplicado: intentar prestar un libro que ya está prestado debería rechazar la operación.
 
+## Mapa v2 (branch `v2`, una jerarquía en un flujo nuevo)
+
+Dominio: sistema de biblioteca (el mismo de v1). Familia nueva: **BST**. Sin grafos.
+
+| Flujo nuevo | Qué llega / sale / se busca | Familia | La uso porque… |
+| --- | --- | --- | --- |
+| Catálogo ordenado por título y búsqueda por título | Cada libro registrado entra al árbol; sale el catálogo en orden alfabético (recorrido inorden) y se buscan libros por título | BST | cada comparación descarta una rama, así que buscar por título no recorre todo el catálogo, y el recorrido inorden devuelve los libros ya ordenados sin tener que reordenar. |
+
+Clave del árbol: `(título en minúsculas, ISBN)`. Así dos libros con el mismo título no se pisan.
+
+Código: `src/arbol_titulos.py` (`NodoTitulo`, `ArbolTitulos`), usado desde `Biblioteca.catalogo_ordenado()` y `Biblioteca.buscar_por_titulo()`. `Biblioteca.registrar_libro()` inserta además cada libro en el árbol; el resto de v1 no cambia.
+
+Caso límite v2 (vacío o no encontrado):
+
+> - Catálogo vacío: `catalogo_ordenado()` devuelve una lista vacía.
+> - Título no encontrado: `buscar_por_titulo("Redes")` devuelve una lista vacía y el programa muestra "Título no encontrado".
+
+Pruebas: `python -m unittest discover -s tests -v`. Las de v2 están en `tests/test_v2_catalogo.py`.
+
 ## Carpetas
 
-- `src/` — clases del dominio (POO). Hoy no codeen.
-- `tests/` — un caso límite, cuando implementen.
+- `src/` — clases del dominio (POO).
+- `tests/` — casos límite de v1 y de v2.
 
 ## Alcance
 
 - v1: clases en `.py` (POO). Entrega Moodle: **2026-10-07 23:59**.
 - Este README **no** sustituye la tarea de Moodle.
-- v2 y v3: otras branches, más adelante, a partir de `v1`.
+- v2: branch `v2`, creada desde `v1`. Entrega Moodle: **2026-11-04 23:59**.
+- v3: otra branch, más adelante, a partir de `v2`.
