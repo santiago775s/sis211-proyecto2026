@@ -1,3 +1,4 @@
+from .arbol_titulos import ArbolTitulos
 from .libro import Libro
 from .socio import Socio
 
@@ -6,12 +7,14 @@ class Biblioteca:
     def __init__(self):
         self.libros = {}
         self.socios = {}
+        self.catalogo = ArbolTitulos()
 
     def registrar_libro(self, isbn, titulo, autor):
         if isbn in self.libros:
             raise ValueError("Ya existe un libro con ese ISBN")
         libro = Libro(isbn, titulo, autor)
         self.libros[isbn] = libro
+        self.catalogo.insertar(libro)
         return libro
 
     def registrar_socio(self, id_socio, nombre):
@@ -23,6 +26,12 @@ class Biblioteca:
 
     def buscar_libro(self, isbn):
         return self.libros.get(isbn)
+
+    def catalogo_ordenado(self):
+        return self.catalogo.inorden()
+
+    def buscar_por_titulo(self, titulo):
+        return self.catalogo.buscar_por_titulo(titulo)
 
     def prestar(self, isbn, id_socio):
         libro = self._obtener_libro(isbn)

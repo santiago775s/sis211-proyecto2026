@@ -33,6 +33,16 @@ def main():
     historial = biblioteca.historial_de_socio("S1")
     print("Historial de S1:", historial if historial else "No hay préstamos")
 
+    print("Catálogo ordenado por título:")
+    for libro in biblioteca.catalogo_ordenado():
+        print("  ", libro)
+
+    encontrados = biblioteca.buscar_por_titulo("Introduction to Algorithms")
+    print("Búsqueda por título:", [str(l) for l in encontrados] if encontrados else "Título no encontrado")
+
+    encontrados = biblioteca.buscar_por_titulo("Título inexistente")
+    print("Búsqueda por título inexistente:", [str(l) for l in encontrados] if encontrados else "Título no encontrado")
+
 
 if __name__ == "__main__":
     main()
